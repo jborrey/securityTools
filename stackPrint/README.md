@@ -9,6 +9,14 @@ Multiple dummy functions are called just to build some stack frames above `main`
 Compile stackPrint.c
 ```sh
 gcc -o stackPrint stackPrint.c
+
+# compiling without Canaries, ASLR (and no NX for fun)
+gcc stackPring.c -o stackPrintUnsafe -fno-stack-protector -Wl,-no_pie,-allow_stack_execute
+
+# -fno-stack-protector turns off Canaries.
+# -Wl sends the following comma delimited arguemtns to the linker (ld)
+#   -no_pie turns off ASRL
+#   -allow_stack_execute turns off NX
 ```
 
 ### Running
